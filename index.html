@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Lumen Robots</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/robots.css" />
+</head>
+<body>
+  <div id="bg" class="bg loc0"></div>
+  <div id="app">
+    <header class="top">
+      <div class="user">
+        <div class="ava" id="ava">LR</div>
+        <div>
+          <div class="nick" id="nick">Пилот</div>
+          <div class="plvl">Ур. <span id="plvl">1</span></div>
+        </div>
+      </div>
+      <div class="curs">
+        <div class="cur c1"><i></i><b id="lum">0</b></div>
+        <div class="cur c2"><i></i><b id="ore">0</b></div>
+        <div class="cur c3"><i></i><b id="nrg">0</b></div>
+        <div class="cur c4"><i></i><b id="str">0</b></div>
+      </div>
+    </header>
+    <div class="xp"><div id="xpbar"></div></div>
+
+    <main id="main">
+      <!-- HOME -->
+      <section class="sc on" id="s-home">
+        <div class="loc-label" id="locLabel">Стартовая площадка</div>
+        <div class="hero-card">
+          <div class="rarity" id="rarity">COMMON</div>
+          <div class="robot-portrait" id="portrait"></div>
+          <h1 id="hname">Бот-01</h1>
+          <p class="hmeta">LVL <span id="hlvl">1</span> · <span id="hincome">+2</span> люменов · облик <span id="hstage">1</span></p>
+          <button class="feed-btn" id="feedBtn">
+            <span class="fb-main">КОРМИТЬ</span>
+            <span class="fb-sub">сытость растёт · −1 энергия</span>
+          </button>
+          <div class="bars">
+            <div class="bar-row"><span>Сытость</span><div class="track"><i id="sat"></i></div><em id="satv">0</em></div>
+            <div class="bar-row"><span>Энергия</span><div class="track"><i class="en" id="en"></i></div><em id="env">0</em></div>
+          </div>
+        </div>
+        <div class="stats3">
+          <div><b id="pass">0</b><small>пассив/ч</small></div>
+          <div><b id="bots">1</b><small>роботов</small></div>
+          <div><b id="farms">1</b><small>ферм</small></div>
+        </div>
+      </section>
+
+      <!-- ROBOTS -->
+      <section class="sc" id="s-bots">
+        <h2>Роботы</h2>
+        <div class="tabs">
+          <button class="tab on" data-t="mine">Мои</button>
+          <button class="tab" data-t="shop">Магазин</button>
+          <button class="tab" data-t="gear">Снаряжение</button>
+        </div>
+        <div id="botsBox"></div>
+      </section>
+
+      <!-- FARMS -->
+      <section class="sc" id="s-farms">
+        <h2>Космо-фермы</h2>
+        <p class="hint">От зонда до мегаструктуры — каждая меняет локацию</p>
+        <div id="farmsBox"></div>
+        <h3 class="subh">Припасы</h3>
+        <div id="supBox"></div>
+      </section>
+
+      <!-- QUESTS -->
+      <section class="sc" id="s-quests">
+        <h2>Задания</h2>
+        <div class="daily" id="daily">
+          <div class="dt">Ежедневная награда</div>
+          <div class="dr" id="dRew">Серия растёт каждый день</div>
+          <button class="btn-primary" id="claimDaily">Забрать</button>
+        </div>
+        <div id="qBox"></div>
+      </section>
+
+      <!-- MINI -->
+      <section class="sc" id="s-mini">
+        <h2>Пояс астероидов</h2>
+        <div id="miniWrap">
+          <p class="hint">18 секунд. Лопай астероиды — получай люмены и руду.</p>
+          <button class="btn-primary" id="miniStart">Старт</button>
+          <p class="hint" id="miniBest">Рекорд: 0</p>
+        </div>
+        <canvas id="miniCanvas" class="hidden"></canvas>
+      </section>
+
+      <!-- STARS -->
+      <section class="sc" id="s-stars">
+        <h2>Stars Shop</h2>
+        <p class="hint">Покупки за звёзды (как Telegram Stars)</p>
+        <div id="starsBox"></div>
+        <button class="btn-outline" id="topupStars">Пополнить +15 ⭐ (демо)</button>
+      </section>
+    </main>
+
+    <nav class="nav">
+      <button class="ni on" data-s="home"><span class="ico"></span>Ранчо</button>
+      <button class="ni" data-s="bots"><span class="ico"></span>Роботы</button>
+      <button class="ni" data-s="farms"><span class="ico"></span>Фермы</button>
+      <button class="ni" data-s="quests"><span class="ico"></span>Дела</button>
+      <button class="ni" data-s="mini"><span class="ico"></span>Игра</button>
+      <button class="ni" data-s="stars"><span class="ico"></span>Stars</button>
+    </nav>
+  </div>
+
+  <div id="float"></div>
+  <div id="fx"></div>
+  <script src="game.js"></script>
+</body>
+</html>
