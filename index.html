@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Lumen Robots</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="bg" class="bg loc0"></div>
+  <div class="stars-bg"></div>
+
+  <div id="app">
+    <header class="top">
+      <div class="user-chip">
+        <div class="ava" id="ava">LR</div>
+        <div class="user-meta">
+          <div class="nick" id="nick">Пилот</div>
+          <div class="plvl">Ур. <span id="plvl">1</span></div>
+        </div>
+      </div>
+      <div class="curs">
+        <div class="cur"><span class="dot d-lumen"></span><b id="lum">0</b></div>
+        <div class="cur"><span class="dot d-ore"></span><b id="ore">0</b></div>
+        <div class="cur"><span class="dot d-nrg"></span><b id="nrg">0</b></div>
+        <div class="cur star"><span class="dot d-star"></span><b id="str">0</b></div>
+      </div>
+    </header>
+    <div class="xp-track"><div id="xpbar"></div></div>
+
+    <main id="main">
+      <section class="sc on" id="s-home">
+        <div class="home-grid">
+          <aside class="side-tools left">
+            <button class="tool-btn" id="btnDailySide" type="button">
+              <span class="tool-ico tool-gift"></span>
+              <span class="tool-lab">Ежедневка</span>
+            </button>
+            <button class="tool-btn" id="btnQuestSide" type="button">
+              <span class="tool-ico tool-list"></span>
+              <span class="tool-lab">Задания</span>
+            </button>
+          </aside>
+
+          <div class="char-stage">
+            <div class="score-row">
+              <div class="score-big"><span class="score-mark"></span><b id="scoreVal">0</b></div>
+            </div>
+
+            <div class="char-card" id="charCard">
+              <div class="card-rarity" id="rarity">COMMON</div>
+              <div class="card-lvl">LVL <span id="hlvl">1</span></div>
+              <model-viewer
+                id="mv"
+                class="mv"
+                src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb"
+                alt="Робот"
+                auto-rotate
+                auto-rotate-delay="0"
+                rotation-per-second="22deg"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="1"
+                exposure="1.1"
+                environment-image="neutral"
+                camera-orbit="25deg 75deg 105%"
+              ></model-viewer>
+              <div class="card-glow"></div>
+            </div>
+
+            <h1 class="char-name" id="hname">Люмин</h1>
+            <p class="char-meta">облик <span id="hstage">1</span> · <span id="hincome">+2</span> / корм</p>
+
+            <button class="cta-feed" id="feedBtn" type="button">
+              <span class="cta-main">ЖМИ И КОРМИ</span>
+              <span class="cta-gain" id="ctaGain">+2</span>
+            </button>
+            <p class="cta-hint">сытость растёт · −1 энергия</p>
+
+            <div class="meters">
+              <div class="meter">
+                <div class="meter-top"><span>Сытость</span><em id="satv">0%</em></div>
+                <div class="meter-bar"><i id="sat"></i></div>
+              </div>
+              <div class="meter">
+                <div class="meter-top"><span>Энергия</span><em id="env">0</em></div>
+                <div class="meter-bar"><i class="en" id="en"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="side-tools right">
+            <button class="tool-btn" id="btnMiniSide" type="button">
+              <span class="tool-ico tool-game"></span>
+              <span class="tool-lab">Мини-игра</span>
+            </button>
+            <button class="tool-btn" id="btnStarsSide" type="button">
+              <span class="tool-ico tool-star"></span>
+              <span class="tool-lab">Stars</span>
+            </button>
+          </aside>
+        </div>
+
+        <div class="carousel-wrap">
+          <div class="carousel" id="carousel"></div>
+        </div>
+        <div class="loc-chip" id="locLabel">Зонд</div>
+      </section>
+
+      <section class="sc" id="s-bots">
+        <h2>Роботы</h2>
+        <div class="tabs">
+          <button class="tab on" data-t="mine" type="button">Мои</button>
+          <button class="tab" data-t="shop" type="button">Магазин</button>
+          <button class="tab" data-t="gear" type="button">Снаряжение</button>
+        </div>
+        <div id="botsBox"></div>
+      </section>
+
+      <section class="sc" id="s-farms">
+        <h2>Космо-фермы</h2>
+        <p class="hint">От зонда до мегаструктуры — меняют локацию и доход</p>
+        <div id="farmsBox"></div>
+        <h3 class="subh">Припасы</h3>
+        <div id="supBox"></div>
+      </section>
+
+      <section class="sc" id="s-quests">
+        <h2>Задания</h2>
+        <div class="daily-card" id="daily">
+          <div class="daily-title">Ежедневная награда</div>
+          <div class="daily-sub" id="dRew">Серия растёт каждый день</div>
+          <button class="btn-solid" id="claimDaily" type="button">Забрать</button>
+        </div>
+        <div id="qBox"></div>
+      </section>
+
+      <section class="sc" id="s-mini">
+        <h2>Пояс астероидов</h2>
+        <div id="miniWrap">
+          <p class="hint">18 секунд. Лопай астероиды — люмены и руда.</p>
+          <button class="btn-solid" id="miniStart" type="button">Старт</button>
+          <p class="hint" id="miniBest">Рекорд: 0</p>
+        </div>
+        <canvas id="miniCanvas" class="hidden"></canvas>
+      </section>
+
+      <section class="sc" id="s-stars">
+        <h2>Stars Shop</h2>
+        <p class="hint">Покупки за звёзды (как Telegram Stars)</p>
+        <div id="starsBox"></div>
+        <button class="btn-outline" id="topupStars" type="button">Пополнить +15 ★ (демо)</button>
+      </section>
+    </main>
+
+    <nav class="nav">
+      <button class="nav-item on" data-s="home" type="button">
+        <span class="nav-ico ico-home"></span><span>Ранчо</span>
+      </button>
+      <button class="nav-item" data-s="bots" type="button">
+        <span class="nav-ico ico-bots"></span><span>Роботы</span>
+      </button>
+      <button class="nav-item" data-s="farms" type="button">
+        <span class="nav-ico ico-farm"></span><span>Фермы</span>
+      </button>
+      <button class="nav-item" data-s="quests" type="button">
+        <span class="nav-ico ico-quest"></span><span>Дела</span>
+      </button>
+      <button class="nav-item" data-s="mini" type="button">
+        <span class="nav-ico ico-play"></span><span>Игра</span>
+      </button>
+      <button class="nav-item" data-s="stars" type="button">
+        <span class="nav-ico ico-star"></span><span>Stars</span>
+      </button>
+    </nav>
+  </div>
+
+  <div id="float"></div>
+  <div id="fx"></div>
+  <script src="game.js"></script>
+</body>
+</html>
