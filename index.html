@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cosmo Farm</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- TOP BAR -->
+    <header class="top">
+      <div class="user">
+        <div class="ava">🛸</div>
+        <div>
+          <div class="name" id="uname">Пилот</div>
+          <div class="ulvl">Ур. <span id="ulvl">1</span></div>
+        </div>
+      </div>
+      <div class="curs">
+        <div class="cur"><span>💎</span><b id="cr">0</b></div>
+        <div class="cur"><span>🔩</span><b id="mt">0</b></div>
+        <div class="cur"><span>⚡</span><b id="en">0</b></div>
+        <div class="cur star"><span>⭐</span><b id="st">0</b></div>
+      </div>
+    </header>
+    <div class="xp"><i id="xpfill"></i></div>
+
+    <!-- LOCATION BG -->
+    <div class="loc-bg" id="locBg"></div>
+
+    <main id="main">
+      <!-- HOME -->
+      <section class="screen on" id="s-home">
+        <div class="loc-name" id="locName">🚀 Стартовая площадка</div>
+
+        <div class="hero-wrap">
+          <div class="rarity" id="rarity">COMMON</div>
+          <div class="hero" id="hero">🤖</div>
+          <div class="hname" id="hname">Робот-помощник</div>
+          <div class="hmeta">LVL <span id="hlvl">1</span> · <span id="hincome">+2</span> 💎</div>
+
+          <button class="feed" id="feedBtn">
+            <b>КОРМИТЬ</b>
+            <small>+сытость · заработок</small>
+          </button>
+
+          <div class="bars">
+            <div class="br">
+              <span>Сытость</span>
+              <div class="track"><i id="sat"></i></div>
+              <em id="satv">0%</em>
+            </div>
+            <div class="br">
+              <span>Энергия</span>
+              <div class="track"><i class="en" id="enbar"></i></div>
+              <em id="env">40</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats3">
+          <div><b id="pass">0</b><span>пассив/ч</span></div>
+          <div><b id="bots">1</b><span>роботов</span></div>
+          <div><b id="locLvl">1</b><span>локация</span></div>
+        </div>
+      </section>
+
+      <!-- ROBOTS -->
+      <section class="screen" id="s-robots">
+        <h2>🤖 Мои роботы</h2>
+        <div class="tabs">
+          <button class="tab on" data-t="list">Список</button>
+          <button class="tab" data-t="equip">Снаряжение</button>
+          <button class="tab" data-t="shop">Магазин</button>
+        </div>
+        <div id="robotsBox"></div>
+      </section>
+
+      <!-- FARM / LOCATIONS -->
+      <section class="screen" id="s-farm">
+        <h2>🌌 Локации фермы</h2>
+        <p class="hint">Покупка новой локации меняет фон и добычу</p>
+        <div id="locsBox"></div>
+      </section>
+
+      <!-- SUPPLIES -->
+      <section class="screen" id="s-shop">
+        <h2>📦 Припасы и улучшения</h2>
+        <div id="supBox"></div>
+      </section>
+
+      <!-- QUESTS -->
+      <section class="screen" id="s-quests">
+        <h2>📋 Задания</h2>
+        <div class="daily" id="dailyBox">
+          <div class="dt">🎁 Ежедневная награда</div>
+          <div class="dr" id="dRew">+100 💎  +30 ⚡  +20 🔩</div>
+          <button class="btn" id="claimDaily">Забрать</button>
+        </div>
+        <div id="qBox"></div>
+      </section>
+
+      <!-- STARS -->
+      <section class="screen" id="s-stars">
+        <h2>⭐ Stars</h2>
+        <div id="starsBox"></div>
+      </section>
+    </main>
+
+    <nav class="nav">
+      <button class="n on" data-s="home"><span>🏠</span>Ферма</button>
+      <button class="n" data-s="robots"><span>🤖</span>Роботы</button>
+      <button class="n" data-s="farm"><span>🌌</span>Локации</button>
+      <button class="n" data-s="shop"><span>📦</span>Припасы</button>
+      <button class="n" data-s="quests"><span>📋</span>Задания</button>
+      <button class="n" data-s="stars"><span>⭐</span>Stars</button>
+    </nav>
+  </div>
+
+  <div id="float"></div>
+  <div id="parts"></div>
+  <script src="game.js"></script>
+</body>
+</html>
